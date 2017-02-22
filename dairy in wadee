@@ -92,8 +92,25 @@ Spring为构建Web应用提供了一个功能全面的MVC框架。虽然Spring�
   
 -------------------------------------------------------------------------------------------------------------
 day 3 -------------------------------------------------------------------------------------------------------
+//form表单
 
+处理表单数据
+1. 识别所有的成功控件。
+2. 为所有的成功控件创建一个数据集合，它们包含 control-name/current-value 这样的值对。
+3. 按照form.enctype指定的编码规则对前面准备好的数据进行编码。编码规则将放在请求中，用Content-Type指出。
+4. 提交编码后的数据。此时会区分post,get二种情况，提交的地址由form.action属性指定的。
 
+传值3种  servlet传值【request】   【session】 【servletContext】   
+//session
+在Java中，HTTP的Session对象用javax.servlet.http.HttpSession来表示。
+ 
+1、概念：Session代表服务器与浏览器的一次会话过程，这个过程是连续的，也可以时断时续的。在Servlet中，session指的是HttpSession类的对象。
+2、Session创建的时间是：
+一个常见的误解是以为session在有客户端访问时就被创建，然而事实是直到某server端程序调用 HttpServletRequest.getSession(true)这样的语
+句时才被创建，注意如果JSP没有显示的使用 <% @page session="false"%> 关闭session，则JSP文件在编译成Servlet时将会自动加上这样一条语句
+HttpSession session = HttpServletRequest.getSession(true);这也是JSP中隐含的 session对象的来历。
+由于session会消耗内存资源，因此，如果不打算使用session，应该在所有的JSP中关闭它。
+//控制器第二个作用：页面跳转：request: include  forward, response:重定向
 -------------------------------------------------------------------------------------------------------------
 day 4 -------------------------------------------------------------------------------------------------------
 
