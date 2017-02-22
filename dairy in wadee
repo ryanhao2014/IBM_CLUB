@@ -111,6 +111,43 @@ day 3 --------------------------------------------------------------------------
 HttpSession session = HttpServletRequest.getSession(true);这也是JSP中隐含的 session对象的来历。
 由于session会消耗内存资源，因此，如果不打算使用session，应该在所有的JSP中关闭它。
 //控制器第二个作用：页面跳转：request: include  forward, response:重定向
+
+//开发hibernate流程
+(手写版)
+1.建库建表
+2.引入hiberate的包
+3.配置hibernate.cfg.xml
+4.编写POJO类(Users类)
+5.编写对象映射文件
+6.编写测试类，并测试.
+->Hibernate标注(Hibernate Annotations)
+从Hebernate3.2开始，Hibernate Annotations提供了JDK 5.0 关于对象-关系映射的标注。通过使用Hibernate标注，可以减少XML描述
+符的使用，在编译期进行校验，以及减少配置和维护工作等。
+
+->POJO
+在使用hibernate时，要求和数据库的某张表相互映射的那个java类，是一个POJO类，一般放在com.xxx.domain包下,POJO类翻译过来就是:
+简单的Java对象（Plain Ordinary Java Objects）实际就是普通JavaBeans,使用POJO名称是为了避免和EJB混淆起来。一个POJO类应当
+具有:
+ ①有一个主键属性,用于唯一标识该对象。
+(这就是为什么hibernate设计者建议要映射的表需要一个主键)
+ ②有其它的属性
+ ③有对各个属性操作的get/set方法
+ ④属性一般是private修饰.
+ ⑤一定有一个无参的构造函数(用于hibernate框架反射用.)
+
+->SessionFactory(会话工厂)接口
+
+	①缓存sql语句和某些数据
+	②在应用程序初始化的时候创建,是一个重量级的类(吃内存),一般
+用单例模式保证一个应用中只需要一个 SessionFactory实例.
+	③如果某个应用访问多个数据库，则要创建多个会话工厂实例,一般
+是一个数据库一个会话工厂实例.
+	④通过SessionFactory接口可以获得Session(会话)实例.
+示意代码: Configuration cf=new Configuration().configure();
+		   SessionFactory sf=cf.buildSessionFactory();
+		   Session s=sf.getCurrentSession();
+		   //或者是: Session s=sf.openSession();
+
 -------------------------------------------------------------------------------------------------------------
 day 4 -------------------------------------------------------------------------------------------------------
 
